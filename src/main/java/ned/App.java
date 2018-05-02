@@ -4,10 +4,6 @@ import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
 
 import java.util.ArrayList;
 
-/**
- * Hello world!
- *
- */
 public class App
 {
     public static void main( String[] args )
@@ -21,12 +17,20 @@ public class App
                 new Vector2D( 60.0,  15.0)
         };
 
-        Vector2D gp = new Vector2D(10,0);
+        Vector2D gp = new Vector2D(10,2);
 
         ArrayList<double[]> out;
 
         out = GenExData.genDat(fp, gp);
+//        out.forEach( a -> System.out.println(a[0] + " " + a[1]) );
+        double[] prescribedDistances = new double[out.size()];
+        for(int i = 0; i<prescribedDistances.length; i++){
+            prescribedDistances[i] = out.get(i)[0];
+        }
 
+        Vector2D[] observedPoints = fp;
+
+        CircleFit.fitSome(prescribedDistances, observedPoints);
 
     }
 }
